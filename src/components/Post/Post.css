@@ -1,0 +1,38 @@
+.Post {
+  height: 345px;
+  width: 250px;
+  background: var(--pure-white);
+  display: flex;
+  flex-direction: column;
+  /* border: solid 1px var(--border-color); */
+  border: solid;
+  border-width: thin;
+
+}
+.Post .media {
+  height: 250px;
+  width: 100%;
+}
+.Post .media img {
+  height: 250px;
+  width: 248px;
+}
+.Post .product-info {
+  flex: 1;
+  display: flex;
+  border-top: solid 1px var(--border-color);
+}
+.Post .info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  padding: 8px 12px;
+}
+.Post .info .product-name {
+  font-size: 15px;
+  font-weight: 500;
+}
+.Post .info .product-price {
+  font-size: 14px;
+}
