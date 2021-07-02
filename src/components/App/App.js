@@ -50,18 +50,18 @@ export default function App() {
       setIsFetching(false);
     };
 
-    // const fetchFood = async () => {
-    //   setIsFetching(true);
+    const fetchFood = async () => {
+      setIsFetching(true);
 
-    //   const { data, error } = await apiClient.listUserFood(user);
-    //   if (data) setFoods(data.foods);
-    //   if (error) setError(error);
+      const { data, error } = await apiClient.listUserFood(user);
+      if (data) setFoods(data.food);
+      if (error) setError(error);
 
-    //   setIsFetching(false);
-    // };
+      setIsFetching(false);
+    };
 
     fetchExercises();
-    // fetchFood();
+    fetchFood();
   }, [user]);
 
 

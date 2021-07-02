@@ -11,7 +11,7 @@ export default function Food({ user, isFetching, foods, error }) {
     <div className="Food">
       <h8 className="intro">Food</h8>
 
-      <Link to="create">
+    <Link to="create">
         <button>Add New Food</button>
         </Link>
       <div className="feed">

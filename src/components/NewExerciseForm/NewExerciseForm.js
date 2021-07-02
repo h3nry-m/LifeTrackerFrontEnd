@@ -30,7 +30,7 @@ export default function NewExerciseForm({ user, addExercise, exercises }) {
       intensity: form.intensity,
     });
     
-    if (data) addExercise(form);
+    if (data) addExercise(data.exercise);
     if (errors) setErrors((e) => ({ ...e, form: errors }));
 
     setForm({ exerciseName: "", category: "", duration: "", intensity: "" });

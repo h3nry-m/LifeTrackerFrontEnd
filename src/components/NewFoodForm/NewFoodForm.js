@@ -2,6 +2,7 @@ import { useState } from "react";
 import apiClient from "../services/apiClient";
 import NotAllowed from "../NotAllowed/NotAllowed";
 import "./NewFoodForm.css";
+import { Navigate } from "react-router-dom";
 
 
 export default function NewFoodForm({ user, addFood, foods }) {
@@ -12,6 +13,7 @@ export default function NewFoodForm({ user, addFood, foods }) {
     category: "",
     quantity: "",
     calories: "",
+    imageUrl: "",
   });
 
   const handleOnInputChange = (event) => {
@@ -21,22 +23,24 @@ export default function NewFoodForm({ user, addFood, foods }) {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    // setIsLoading(true);
+    
 
     const { data, errors } = await apiClient.createFood({
       foodName: form.foodName,
       category: form.category,
       quantity: form.quantity,
       calories: form.calories,
+      imageUrl: form.imageUrl,
     });
     // addExercise(form);
-    if (data) addFood(form);
+    if (data) addFood(data.food);
     if (errors) setErrors((e) => ({ ...e, form: errors }));
 
-    setForm({ foodName: "", category: "", quantity: "", calories: "" });
+    setForm({ foodName: "", category: "", quantity: "", calories: "", imageUrl: ""});
 
-    setIsLoading(false);
-    
+    // setIsLoading(false);
+    // navigate('/')
   };
 
   const renderForm = () => {
@@ -56,19 +60,7 @@ export default function NewFoodForm({ user, addFood, foods }) {
           />
         </div>
 
-        {/* <div className="input-field">
-          <label htmlFor="category">Category</label>
-          <input
-            type="text"
-            name="category"
-            placeholder="Choose between resistance and Fruit"
-            value={form.category}
-            onChange={handleOnInputChange}
-          />
-        </div> */}
-
         <div className="radio">
-          {/* <label htmlFor="category">Category</label> */}
           <input
             type="radio"
             name="category"
@@ -80,7 +72,6 @@ export default function NewFoodForm({ user, addFood, foods }) {
         </div>
 
         <div className="radio">
-          {/* <label htmlFor="category">Category</label> */}
           <input
             type="radio"
             name="category"
@@ -89,6 +80,39 @@ export default function NewFoodForm({ user, addFood, foods }) {
             onChange={handleOnInputChange}
           />
           Vegetable
+        </div>
+
+        <div className="radio">
+          <input
+            type="radio"
+            name="category"
+            value="Grain"
+            checked={form.category === "Grain"}
+            onChange={handleOnInputChange}
+          />
+          Grain
+        </div>
+
+        <div className="radio">
+          <input
+            type="radio"
+            name="category"
+            value="Dairy"
+            checked={form.category === "Dairy"}
+            onChange={handleOnInputChange}
+          />
+          Dairy
+        </div>
+
+        <div className="radio">
+          <input
+            type="radio"
+            name="category"
+            value="Beverage"
+            checked={form.category === "Beverage"}
+            onChange={handleOnInputChange}
+          />
+          Beverage
         </div>
 
         <div className="input-field">
@@ -113,6 +137,17 @@ export default function NewFoodForm({ user, addFood, foods }) {
             onChange={handleOnInputChange}
           />
         </div>
+
+        <div className="input-field">
+          <label htmlFor="imageUrl">Image URL</label>
+          <input
+            type="text"
+            name="imageUrl"
+            value={form.imageUrl}
+            onChange={handleOnInputChange}
+          />
+        </div>
+
         <button className="btn" disabled={isLoading} onClick={handleOnSubmit}>
           {isLoading ? "Loading..." : "Submit"}
         </button>
